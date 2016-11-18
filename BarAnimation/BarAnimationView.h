@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  BarAnimationView.h
 //  BarAnimation
 //
 //  Created by zwz on 2016/11/16.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface BarAnimationView : UIView
 
-
+- (void)startAnimation;
+- (void)stopAnimation;
 @end
-

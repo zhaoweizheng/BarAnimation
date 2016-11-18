@@ -7,7 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "MessageViewController.h"
+#import "DiscoverViewController.h"
+#import "MineViewController.h"
 
+#define RGB(r,g,b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1]
 @interface AppDelegate ()
 
 @end
@@ -16,7 +20,37 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    //创建UITabBarController控制器
+    UITabBarController *tabVc = [UITabBarController new];
+    //创建第一个控制器
+    MessageViewController *firstVc = [MessageViewController new];
+    //设置第一个控制器的tabBarItem的样式
+    //如果图片出现和原有样子较大的差别，那么设置为不被渲染
+    //UIImage *selectedImage = [UIImage imageNamed:@"icon_home_home"];
+    //selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    firstVc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"icon_home_home_gray" ] selectedImage:[UIImage imageNamed:@"icon_home_home"]];
+    //firstVc.tabBarItem.badgeValue=@"123";
+    //将视图控制器添加到导航控制器中
+    UINavigationController *n1 = [[UINavigationController alloc] initWithRootViewController:firstVc];
+    n1.navigationBar.barTintColor = RGB(64, 149, 239);
+    //创建第二个视图控制器
+    DiscoverViewController *secondVc = [DiscoverViewController new];
+    UINavigationController *n2 = [[UINavigationController alloc] initWithRootViewController:secondVc];
+    //设置第二个控制器的tabBarItem的样式
+    //secondVc.tabBarItem.title=@"报志愿";
+    secondVc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"报志愿" image:[UIImage imageNamed:@"icon_home_daily_gray" ]selectedImage:[UIImage imageNamed:@"icon_home_daily"]];
+    
+    //创建第三个视图控制器
+    MineViewController *thirdVc = [MineViewController new];
+    UINavigationController *n3 = [[UINavigationController alloc] initWithRootViewController:thirdVc];
+    //设置第三个控制器的tabBarItem的样式
+    thirdVc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"icon_home_people_gray" ]selectedImage:[UIImage imageNamed:@"icon_home_people"]];
+    //将所有的视图控制器添加到tabVc的子视图控制器中
+    tabVc.viewControllers = @[n1, n2, n3];
+    //将tabVc设置为根视图控制器
+    self.window.rootViewController = tabVc;
+    self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }
 
